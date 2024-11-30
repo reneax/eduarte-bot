@@ -32,6 +32,7 @@ declare global {
             EDUARTE_PASSWORD: string,
             AUTH_COOKIE: ?string,
             DEBUG: boolean,
+            IS_MICROSOFT_LOGIN: boolean,
             SAVE_DATA: boolean,
             HEADLESS: boolean,
             CLIENT_ID: string,

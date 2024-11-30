@@ -38,7 +38,14 @@ export const enumToArray = <T extends Record<string, any>>(input: T): Array<{ la
 
 
 export const refreshCookie = async (auth: EduarteAuth, api: EduarteAPI) => {
-    let authCookie = await auth.loginMicrosoft(process.env.EDUARTE_EMAIL, process.env.EDUARTE_PASSWORD);
+    let authCookie;
+
+    if (process.env.IS_MICROSOFT_LOGIN) {
+        authCookie = await auth.loginMicrosoft(process.env.EDUARTE_EMAIL, process.env.EDUARTE_PASSWORD);
+    } else {
+        authCookie = await auth.loginEduarte(process.env.EDUARTE_EMAIL, process.env.EDUARTE_PASSWORD);
+    }
+
     api.setAuthCookie(authCookie);
 }
 

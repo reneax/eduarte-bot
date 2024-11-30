@@ -27,10 +27,17 @@ import {EduarteAPI} from "./api/eduarte-api";
         let authCookie = process.env.AUTH_COOKIE;
 
         if (!authCookie) {
-            authCookie = await client.auth.loginMicrosoft(
-                process.env.EDUARTE_EMAIL,
-                process.env.EDUARTE_PASSWORD
-            );
+            if (process.env.IS_MICROSOFT_LOGIN) {
+                authCookie = await client.auth.loginMicrosoft(
+                    process.env.EDUARTE_EMAIL,
+                    process.env.EDUARTE_PASSWORD
+                );
+            } else {
+                authCookie = await client.auth.loginEduarte(
+                    process.env.EDUARTE_EMAIL,
+                    process.env.EDUARTE_PASSWORD
+                );
+            }
         }
 
         client.api = new EduarteAPI(process.env.PORTAL_URL, authCookie);
@@ -45,5 +52,5 @@ import {EduarteAPI} from "./api/eduarte-api";
         require(`${handlersDir}/${handler}`)(client)
     })
 
-    await client.login(process.env.TOKEN)
+    await client.login(process.env.TOKEN);
 })();
