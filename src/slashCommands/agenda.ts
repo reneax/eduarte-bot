@@ -7,7 +7,7 @@ const command: SlashCommand = {
         .setName("agenda")
         .setContexts(InteractionContextType.Guild)
         .setDefaultMemberPermissions(8)
-        .setDescription("Shows your agenda"),
+        .setDescription("Shows your agenda with buttons to go through it."),
     execute: async (interaction) => {
         await interaction.deferReply();
         const { auth, api } = interaction.client;

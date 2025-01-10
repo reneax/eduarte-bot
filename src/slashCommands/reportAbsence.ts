@@ -87,9 +87,10 @@ const command: SlashCommand = {
             });
         }
 
-        let reportDetails = `Reason: ${AbsenceReason[reason]}\nBegin: <t:${getUnix(
-            beginTimeDate
-        )}>\nEnd: <t:${getUnix(endTimeDate)}>`;
+        let reportDetails =
+            `Reason: ${AbsenceReason[reason]}\n`
+            + `Begin: <t:${getUnix(beginTimeDate)}>\n`
+            + `End: <t:${getUnix(endTimeDate)}>`;
 
         const row =
             new ActionRowBuilder<MessageActionRowComponentBuilder>().addComponents(

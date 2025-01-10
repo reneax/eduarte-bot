@@ -44,7 +44,11 @@ const command: SlashCommand = {
                         .setFooter({text: "Eduarte"})
                         .setTitle("Subjects:")
                         .setDescription(schoolDay.subjects.map(subject =>
-                            `Name: ${subject.name}\nClass: ${subject.location} | ${subject.className}\nStarts: <t:${subject.startTimeObject && getUnix(subject.startTimeObject)}>\nEnds: <t:${subject.endTimeObject && getUnix(subject.endTimeObject)}>\nTeacher: ${subject.teacher}\nAbsence: ${subject.absenceStatus}`
+                            `Name: ${subject.name}\nClass: ${subject.location} | ${subject.className}\n` +
+                            `Starts: <t:${subject.startTimeObject && getUnix(subject.startTimeObject)}>\n` +
+                            `Ends: <t:${subject.endTimeObject && getUnix(subject.endTimeObject)}>\n` +
+                            `Teacher: ${subject.teacher}\n` +
+                            `Absence: ${subject.absenceStatus}`
                         ).join("\n-----------------------------\n"))
                         .setColor(getThemeColor("text"))
                 ],
