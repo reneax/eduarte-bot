@@ -31,10 +31,12 @@ declare global {
             EDUARTE_EMAIL: string,
             EDUARTE_PASSWORD: string,
             AUTH_COOKIE: ?string,
-            DEBUG: boolean,
-            IS_MICROSOFT_LOGIN: boolean,
-            SAVE_DATA: boolean,
-            HEADLESS: boolean,
+            // booleans are not parsed by default.
+            DEBUG: string,
+            IS_MICROSOFT_LOGIN: string,
+            DISABLE_SANDBOX: string,
+            SAVE_DATA: string,
+            HEADLESS: string,
             CLIENT_ID: string,
         }
     }

@@ -12,7 +12,7 @@ const command: SlashCommand = {
         interaction.reply({
             embeds: [
                 new EmbedBuilder()
-                    .setFooter({ text: "Eduarte" })
+                    .setFooter({text: "Eduarte"})
                     .setDescription(`Ping: ${interaction.client.ws.ping}`)
                     .setColor(getThemeColor("text"))
             ]

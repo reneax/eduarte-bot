@@ -3,12 +3,12 @@ import {SlashCommand} from "./types";
 import {config} from "dotenv";
 import {readdirSync} from "fs";
 import {join} from "path";
-import {color} from "./functions";
+import {color, stringToBoolean} from "./functions";
 import {EduarteAuth} from "./api/eduarte-auth";
 import {EduarteAPI} from "./api/eduarte-api";
 
 (async () => {
-    const {Guilds, MessageContent, GuildMessages, GuildMembers} = GatewayIntentBits
+        const {Guilds, MessageContent, GuildMessages, GuildMembers} = GatewayIntentBits
     const client = new Client({intents: [Guilds, MessageContent, GuildMessages, GuildMembers]})
 
     config()
@@ -20,14 +20,15 @@ import {EduarteAPI} from "./api/eduarte-api";
 
         client.auth = new EduarteAuth(
             process.env.PORTAL_URL,
-            process.env.HEADLESS,
-            process.env.SAVE_DATA
+            stringToBoolean(process.env.HEADLESS),
+            stringToBoolean(process.env.SAVE_DATA),
+            stringToBoolean(process.env.DISABLE_SANDBOX),
         );
 
         let authCookie = process.env.AUTH_COOKIE;
 
         if (!authCookie) {
-            if (process.env.IS_MICROSOFT_LOGIN) {
+            if (stringToBoolean(process.env.IS_MICROSOFT_LOGIN)) {
                 authCookie = await client.auth.loginMicrosoft(
                     process.env.EDUARTE_EMAIL,
                     process.env.EDUARTE_PASSWORD

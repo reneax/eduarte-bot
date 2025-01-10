@@ -21,7 +21,7 @@ const command: SlashCommand = {
             let agenda = await api.getAgenda();
             let schoolDay = agenda.filter(schoolDay => schoolDay.dateObject.toDateString() == new Date().toDateString())[0];
 
-            if(!schoolDay) {
+            if (!schoolDay) {
                 return await interaction.editReply({
                     embeds: [
                         new EmbedBuilder()

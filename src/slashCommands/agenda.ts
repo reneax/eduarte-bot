@@ -1,7 +1,6 @@
-import {EmbedBuilder, InteractionContextType, SlashCommandBuilder} from "discord.js"
-import {getThemeColor, refreshCookie} from "../functions";
-import {SlashCommand} from "../types";
-import {AgendaView} from "../api/objects/agendaView";
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, SlashCommandBuilder, EmbedBuilder, InteractionContextType } from "discord.js";
+import { getThemeColor, refreshCookie } from "../functions";
+import { SlashCommand } from "../types";
 
 const command: SlashCommand = {
     command: new SlashCommandBuilder()
@@ -11,7 +10,7 @@ const command: SlashCommand = {
         .setDescription("Shows your agenda"),
     execute: async (interaction) => {
         await interaction.deferReply();
-        const {auth, api} = interaction.client;
+        const { auth, api } = interaction.client;
 
         try {
             if (!await api.isSessionValid()) {
@@ -20,16 +19,28 @@ const command: SlashCommand = {
 
             let agenda = await api.getAgenda();
 
+            const buttons = agenda.map(schoolDay => (
+                new ButtonBuilder()
+                    .setCustomId(`agenda_${schoolDay.dateString}`)
+                    .setLabel(schoolDay.dateString)
+                    .setStyle(ButtonStyle.Primary)
+            ));
+
+            const actionRows = [];
+            for (let i = 0; i < buttons.length; i += 5) {
+                actionRows.push(new ActionRowBuilder<ButtonBuilder>().addComponents(buttons.slice(i, i + 5)));
+            }
+
             await interaction.editReply({
                 embeds: [
                     new EmbedBuilder()
                         .setFooter({ text: "Eduarte" })
                         .setTitle("Agenda:")
-                        .setDescription(`${agenda.map(schoolDay => schoolDay.dateString).join("\n")}`)
+                        .setDescription("Select a date for more details.")
                         .setColor(getThemeColor("text"))
                 ],
-
-            })
+                components: actionRows
+            });
         } catch (e) {
             console.log(`Failed to get agenda: ${e}`);
             await interaction.editReply({
@@ -39,9 +50,9 @@ const command: SlashCommand = {
                         .setDescription(`Failed to get agenda, check console for errors.`)
                         .setColor(getThemeColor("error"))
                 ]
-            })
+            });
         }
     },
-}
+};
 
-export default command
+export default command;

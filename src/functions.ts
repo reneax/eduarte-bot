@@ -27,6 +27,10 @@ export const convertTimeToDate = (timeString: string): Date => {
     return now;
 };
 
+export const stringToBoolean = (value: string)=> {
+    return value === 'true';
+}
+
 export const enumToArray = <T extends Record<string, any>>(input: T): Array<{ label: string; value: T[keyof T] }> => {
     return Object.keys(input)
         .filter(key => isNaN(Number(key)))

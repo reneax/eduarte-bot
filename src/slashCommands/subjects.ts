@@ -11,8 +11,8 @@ const command: SlashCommand = {
         .setDescription("Shows the subjects of a school day.")
         .addStringOption(option =>
             option.setName('schoolday')
-            .setDescription('The date string of the school day.')
-            .setRequired(true),
+                .setDescription('The date string of the school day.')
+                .setRequired(true),
         ),
     execute: async (interaction) => {
         await interaction.deferReply();
@@ -27,7 +27,7 @@ const command: SlashCommand = {
             let agenda = await api.getAgenda();
             let schoolDay = agenda.filter(schoolDay => schoolDay.dateString === schoolDayString)[0];
 
-            if(!schoolDay) {
+            if (!schoolDay) {
                 return await interaction.editReply({
                     embeds: [
                         new EmbedBuilder()
