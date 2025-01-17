@@ -6,14 +6,17 @@ import {BotEvent} from "../types";
 
 module.exports = (client: Client) => {
     let eventsDir = join(__dirname, "../events")
+    let files = readdirSync(eventsDir);
 
-    readdirSync(eventsDir).forEach(file => {
+    files.forEach(file => {
         if (!file.endsWith(".js")) return;
         let event: BotEvent = require(`${eventsDir}/${file}`).default
         event.once ?
             client.once(event.name, (...args) => event.execute(...args))
             :
             client.on(event.name, (...args) => event.execute(...args))
-        console.log(color("text", `🌠 Successfully loaded event ${color("variable", event.name)}`))
-    })
+    });
+
+    console.log(color("text", `🔥 Successfully loaded ${color("variable", files.length)} event(s)`));
+
 }
