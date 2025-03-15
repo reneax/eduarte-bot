@@ -61,7 +61,7 @@ class EduarteAPI {
         const html = parseHtml(page);
         const schoolDays: SchoolDay[] = [];
 
-        let agenda = html.querySelector(".l-full");
+        let agenda = html.querySelector(".agenda-list");
 
         if (!agenda) throw new Error("Agenda element has not been found. Is the agenda view not on list mode?");
 
