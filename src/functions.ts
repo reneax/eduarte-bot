@@ -44,7 +44,7 @@ export const refreshCookie = async (auth: EduarteAuth, api: EduarteAPI) => {
     let authCookie;
 
     if (process.env.IS_MICROSOFT_LOGIN) {
-        authCookie = await auth.loginMicrosoft(process.env.EDUARTE_EMAIL, process.env.EDUARTE_PASSWORD);
+        authCookie = await auth.loginMicrosoft(process.env.EDUARTE_EMAIL, process.env.EDUARTE_PASSWORD, process.env.TOTP_SECRET);
     } else {
         authCookie = await auth.loginEduarte(process.env.EDUARTE_EMAIL, process.env.EDUARTE_PASSWORD);
     }

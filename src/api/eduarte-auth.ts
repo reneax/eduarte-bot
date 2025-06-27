@@ -55,7 +55,7 @@ class EduarteAuth {
 
     }
 
-    async loginMicrosoft(email: string, password: string, totpSecret?: string) {
+    async loginMicrosoft(email: string, password: string, totpSecret: string | null) {
         const browser = await puppeteer.launch(this.getBrowserProperties());
 
         try {

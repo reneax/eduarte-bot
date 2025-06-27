@@ -32,7 +32,7 @@ import {EduarteAPI} from "./api/eduarte-api";
                 authCookie = await client.auth.loginMicrosoft(
                     process.env.EDUARTE_EMAIL,
                     process.env.EDUARTE_PASSWORD,
-                    process.env.TOTP_SECRET ?? undefined
+                    process.env.TOTP_SECRET
                 );
             } else {
                 authCookie = await client.auth.loginEduarte(
