@@ -12,6 +12,8 @@ import {EduarteAPI} from "./api/eduarte-api";
     const client = new Client({intents: [Guilds, MessageContent, GuildMessages, GuildMembers]})
 
     config()
+    
+
 
     client.slashCommands = new Collection<string, SlashCommand>()
 
@@ -31,7 +33,8 @@ import {EduarteAPI} from "./api/eduarte-api";
             if (stringToBoolean(process.env.IS_MICROSOFT_LOGIN)) {
                 authCookie = await client.auth.loginMicrosoft(
                     process.env.EDUARTE_EMAIL,
-                    process.env.EDUARTE_PASSWORD
+                    process.env.EDUARTE_PASSWORD,
+                    process.env.TOTP_SECRET ?? undefined
                 );
             } else {
                 authCookie = await client.auth.loginEduarte(

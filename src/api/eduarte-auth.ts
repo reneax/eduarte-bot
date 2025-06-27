@@ -1,4 +1,5 @@
 import puppeteer from 'puppeteer';
+import {TOTP} from 'totp-generator';
 
 class EduarteAuth {
     private readonly portalUrl: string;
@@ -54,7 +55,7 @@ class EduarteAuth {
 
     }
 
-    async loginMicrosoft(email: string, password: string) {
+    async loginMicrosoft(email: string, password: string, totpSecret?: string) {
         const browser = await puppeteer.launch(this.getBrowserProperties());
 
         try {
@@ -63,16 +64,26 @@ class EduarteAuth {
             await page.goto(this.portalUrl);
             await page.waitForNetworkIdle();
 
-            // if  the eduarte logo is not visible.
+
+            // if the eduarte logo is not visible.
             if (!await page.$('img[alt="EduArtelogo"]')) {
                 let skipEmail = false;
+                let skipPassword = false;
 
                 if (this.saveData) {
                     // skip email when password field is visible.
                     const isPasswordFieldHidden = await page.evaluate(el =>
                         el?.hasAttribute('aria-hidden'), await page.$('input[type="password"]'));
+                    const isOTCHidden = await page.evaluate(el =>
+                            el === null || el.hasAttribute('aria-hidden'),
+                        await page.$('input[name="otc"]')
+                    );
+
                     if (!isPasswordFieldHidden) {
                         skipEmail = true;
+                    } else if (!isOTCHidden) {
+                        skipEmail = true;
+                        skipPassword = true;
                     } else if (await page.$(`div[id="otherTileText"]`)) {
                         // we need to login again, use the account selector.
                         if (await page.$(`div[data-test-id="${email}"]`)) {
@@ -96,16 +107,32 @@ class EduarteAuth {
                     await page.keyboard.press('Enter');
                 }
 
-                // fill in password when field is shown and press enter
-                await page.waitForFunction(() => {
-                    const element = document.querySelector('input[type="password"]');
-                    return element && !element.hasAttribute('aria-hidden');
-                }, {timeout: 10000});
-                await page.type('input[type="password"]', password);
-                await page.keyboard.press('Enter');
+                if (!skipPassword) {
+                    // fill in password when field is shown and press enter
+                    await page.waitForFunction(() => {
+                        const element = document.querySelector('input[type="password"]');
+                        return element && !element.hasAttribute('aria-hidden');
+                    }, {timeout: 10000});
+                    await page.type('input[type="password"]', password);
+                    await page.keyboard.press('Enter');
+
+                }
+
+                if (totpSecret) {
+                    let otpCode = TOTP.generate(totpSecret).otp;
+
+                    // fill in otp code when field is shown and press enter
+                    await page.waitForFunction(() => {
+                        const element = document.querySelector('input[name="otc"]');
+                        return element && !element.hasAttribute('aria-hidden');
+                    }, {timeout: 10000});
+
+                    await page.type('input[name="otc"]', otpCode);
+                    await page.keyboard.press('Enter');
+                }
 
                 // wait until eduarte page is loaded.
-                await page.waitForSelector('img[alt="EduArtelogo"]', {timeout: 5000});
+                await page.waitForSelector('img[alt="EduArtelogo"]', {timeout: 30000});
             }
 
             let cookies = await page.cookies();

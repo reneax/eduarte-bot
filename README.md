@@ -19,6 +19,6 @@ Eduarte biedt op het moment van schrijven geen API. Dit maakte het ontwikkelen v
 
 1. Clone deze Github repository.
 2. Installeer NodeJS.
-3. Kopieer het `.env.dist` bestand naar `.env` en vul deze in met de benodigde informatie.
+3. Kopieer het `.env.dist` bestand naar `.env` en vul deze in met de benodigde informatie. Maak voor 2FA gebruik van een QR code scanner om de TOTP secret te verkrijgen.
 4. Installeer de benodigde packages met behulp van `npm ci`.
 5. Start de applicatie met `npm run dev` of build het met `npm run build`.

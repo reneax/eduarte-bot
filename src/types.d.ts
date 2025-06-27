@@ -30,6 +30,7 @@ declare global {
             PORTAL_URL: string,
             EDUARTE_EMAIL: string,
             EDUARTE_PASSWORD: string,
+            TOTP_SECRET: ?string,
             AUTH_COOKIE: ?string,
             // booleans are not parsed by default.
             DEBUG: string,
