@@ -64,7 +64,6 @@ class EduarteAuth {
             await page.goto(this.portalUrl);
             await page.waitForNetworkIdle();
 
-
             // if the eduarte logo is not visible.
             if (!await page.$('img[alt="EduArtelogo"]')) {
                 let skipEmail = false;
