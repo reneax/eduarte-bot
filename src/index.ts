@@ -8,12 +8,10 @@ import {EduarteAuth} from "./api/eduarte-auth";
 import {EduarteAPI} from "./api/eduarte-api";
 
 (async () => {
-        const {Guilds, MessageContent, GuildMessages, GuildMembers} = GatewayIntentBits
+    const {Guilds, MessageContent, GuildMessages, GuildMembers} = GatewayIntentBits
     const client = new Client({intents: [Guilds, MessageContent, GuildMessages, GuildMembers]})
 
     config()
-    
-
 
     client.slashCommands = new Collection<string, SlashCommand>()
 

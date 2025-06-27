@@ -4,19 +4,11 @@ import {
     ButtonInteraction,
     ButtonStyle,
     EmbedBuilder,
-    Interaction,
     InteractionContextType,
     MessageActionRowComponentBuilder,
     SlashCommandBuilder,
 } from "discord.js";
-import {
-    convertTimeToDate,
-    enumToArray,
-    getThemeColor,
-    getUnix,
-    refreshCookie,
-    validateTime,
-} from "../functions";
+import {convertTimeToDate, enumToArray, getThemeColor, getUnix, refreshCookie, validateTime,} from "../functions";
 import {SlashCommand} from "../types";
 import {AbsenceReason} from "../api/objects/absenceReason";
 

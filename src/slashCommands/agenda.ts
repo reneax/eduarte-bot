@@ -1,6 +1,13 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, SlashCommandBuilder, EmbedBuilder, InteractionContextType } from "discord.js";
-import { getThemeColor, refreshCookie } from "../functions";
-import { SlashCommand } from "../types";
+import {
+    ActionRowBuilder,
+    ButtonBuilder,
+    ButtonStyle,
+    EmbedBuilder,
+    InteractionContextType,
+    SlashCommandBuilder
+} from "discord.js";
+import {getThemeColor, refreshCookie} from "../functions";
+import {SlashCommand} from "../types";
 
 const command: SlashCommand = {
     command: new SlashCommandBuilder()
@@ -10,7 +17,7 @@ const command: SlashCommand = {
         .setDescription("Shows your agenda with buttons to go through it."),
     execute: async (interaction) => {
         await interaction.deferReply();
-        const { auth, api } = interaction.client;
+        const {auth, api} = interaction.client;
 
         try {
             if (!await api.isSessionValid()) {
@@ -34,7 +41,7 @@ const command: SlashCommand = {
             await interaction.editReply({
                 embeds: [
                     new EmbedBuilder()
-                        .setFooter({ text: "Eduarte" })
+                        .setFooter({text: "Eduarte"})
                         .setTitle("Agenda:")
                         .setDescription("Select a date for more details.")
                         .setColor(getThemeColor("text"))
@@ -46,7 +53,7 @@ const command: SlashCommand = {
             await interaction.editReply({
                 embeds: [
                     new EmbedBuilder()
-                        .setFooter({ text: "Eduarte" })
+                        .setFooter({text: "Eduarte"})
                         .setDescription(`Failed to get agenda, check console for errors.`)
                         .setColor(getThemeColor("error"))
                 ]

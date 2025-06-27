@@ -1,7 +1,6 @@
 import chalk from "chalk"
 import {EduarteAuth} from "./api/eduarte-auth";
-import {EduarteAPI, SchoolDay} from "./api/eduarte-api";
-import {Client} from "discord.js";
+import {EduarteAPI} from "./api/eduarte-api";
 
 type colorType = "text" | "variable" | "error"
 
@@ -27,7 +26,7 @@ export const convertTimeToDate = (timeString: string): Date => {
     return now;
 };
 
-export const stringToBoolean = (value: string)=> {
+export const stringToBoolean = (value: string) => {
     return value === 'true';
 }
 

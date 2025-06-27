@@ -1,18 +1,18 @@
 import {
-    SlashCommandBuilder,
-    Collection,
     AutocompleteInteraction,
     ChatInputCommandInteraction,
-    ModalSubmitInteraction, SlashCommandOptionsOnlyBuilder
+    Collection,
+    ModalSubmitInteraction,
+    SlashCommandBuilder,
+    SlashCommandOptionsOnlyBuilder
 } from "discord.js"
 import {EduarteAuth} from "./api/eduarte-auth";
 import {EduarteAPI} from "./api/eduarte-api";
-import {NSAPI} from "./ns/ns-api";
 
 
 export interface SlashCommand {
     command: SlashCommandBuilder | SlashCommandOptionsOnlyBuilder,
-    execute: (interaction : ChatInputCommandInteraction) => void,
+    execute: (interaction: ChatInputCommandInteraction) => void,
     autocomplete?: (interaction: AutocompleteInteraction) => void,
     modal?: (interaction: ModalSubmitInteraction<CacheType>) => void,
 }

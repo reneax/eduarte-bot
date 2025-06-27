@@ -1,14 +1,14 @@
-import { ButtonInteraction, EmbedBuilder } from "discord.js";
-import { getThemeColor, getUnix, refreshCookie } from "../functions";
-import { BotEvent } from "../types";
+import {ButtonInteraction, EmbedBuilder} from "discord.js";
+import {getThemeColor, getUnix, refreshCookie} from "../functions";
+import {BotEvent} from "../types";
 
 const event: BotEvent = {
     name: "interactionCreate",
     execute: async (interaction: ButtonInteraction) => {
         if (!interaction.isButton()) return;
 
-        const { client } = interaction;
-        const { api, auth } = client;
+        const {client} = interaction;
+        const {api, auth} = client;
 
         if (interaction.customId.startsWith("agenda_")) {
             const dateString = interaction.customId.replace("agenda_", "");
@@ -24,7 +24,7 @@ const event: BotEvent = {
                     await interaction.reply({
                         embeds: [
                             new EmbedBuilder()
-                                .setFooter({ text: "Eduarte" })
+                                .setFooter({text: "Eduarte"})
                                 .setDescription(`The selected school day (${dateString}) was not found.`)
                                 .setColor(getThemeColor("error"))
                         ],
@@ -35,7 +35,7 @@ const event: BotEvent = {
                 await interaction.update({
                     embeds: [
                         new EmbedBuilder()
-                            .setFooter({ text: "Eduarte" })
+                            .setFooter({text: "Eduarte"})
                             .setTitle(`Subjects for ${dateString}:`)
                             .setDescription(selectedDay.subjects.map(subject =>
                                 `Name: ${subject.name}\nClass: ${subject.location} | ${subject.className}\n` +

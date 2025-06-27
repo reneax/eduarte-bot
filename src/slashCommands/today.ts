@@ -1,7 +1,6 @@
 import {EmbedBuilder, InteractionContextType, SlashCommandBuilder} from "discord.js"
 import {getThemeColor, getUnix, refreshCookie} from "../functions";
 import {SlashCommand} from "../types";
-import {AgendaView} from "../api/objects/agendaView";
 
 const command: SlashCommand = {
     command: new SlashCommandBuilder()
