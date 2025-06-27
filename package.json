@@ -13,20 +13,18 @@
     "dependencies": {
         "@discordjs/builders": "^1.9.0",
         "@discordjs/rest": "^1.1.0",
-        "@types/node": "^18.7.14",
-        "@types/node-schedule": "^2.1.7",
-        "@types/totp-generator": "^0.0.8",
         "date-fns": "^4.1.0",
         "discord.js": "^14.16.3",
         "dotenv": "^16.0.2",
         "https-proxy-agent": "^7.0.5",
         "node-html-parser": "^6.1.13",
-        "node-schedule": "^2.1.1",
         "puppeteer": "^23.4.0",
         "totp-generator": "^1.0.0",
         "uuid": "^10.0.0"
     },
     "devDependencies": {
+        "@types/node": "^18.7.14",
+        "@types/totp-generator": "^0.0.8",
         "@types/uuid": "^10.0.0",
         "tsc-watch": "^6.2.0",
         "typescript": "^5.6.2"
